@@ -22,6 +22,8 @@ public class PlayerController : MonoBehaviour
 
     bool isOnBounce = false;
 
+    GameObject currentLevierGameObject;
+
     void Awake()
     {
         rgbd2D = GetComponent<Rigidbody2D>();
@@ -67,6 +69,14 @@ public class PlayerController : MonoBehaviour
         else if (context.canceled)
         {
             jumpPressed = false;
+        }
+    }
+
+    public void ReadInteractLevier(InputAction.CallbackContext context)
+    {
+        if (context.performed && currentLevierGameObject != null)
+        {
+            currentLevierGameObject.GetComponent<ActiverMovePlateform>().ActivationLevier();
         }
     }
 
@@ -170,6 +180,10 @@ public class PlayerController : MonoBehaviour
         if (collision.gameObject.CompareTag("ralentissement"))
         {
             currentSpeed = 0.01f;
+        }
+        if (collision.gameObject.CompareTag("levier"))
+        {
+            currentLevierGameObject = collision.gameObject;
         }
     }
 

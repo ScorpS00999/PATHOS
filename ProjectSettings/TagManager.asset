@@ -7,6 +7,7 @@ TagManager:
   - Ground
   - objBounce
   - ralentissement
+  - levier
   layers:
   - Default
   - TransparentFX

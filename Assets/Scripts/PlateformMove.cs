@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class PlateformMove : MonoBehaviour
@@ -8,8 +9,8 @@ public class PlateformMove : MonoBehaviour
     [SerializeField] float PosY;
 
 
-    [SerializeField] float PosXRetour;
-    [SerializeField] float PosYRetour;
+    //[SerializeField] float PosXRetour;
+    //[SerializeField] float PosYRetour;
 
     [SerializeField] float speed = 2f;
 
@@ -24,11 +25,14 @@ public class PlateformMove : MonoBehaviour
 
     private bool retour;
 
+    //GameObject player;
+
 
     private void Start()
     {
         pos1 = new Vector2(PosX, PosY);
-        pos2 = new Vector2(PosXRetour, PosYRetour);
+        //pos2 = new Vector2(PosXRetour, PosYRetour);
+        pos2 = transform.position;
     }
 
     private void Update()
@@ -57,14 +61,38 @@ public class PlateformMove : MonoBehaviour
     }
 
 
+    
+
+
+    //void OnCollisionEnter2D(Collision2D collision)
+    //{
+    //    if (collision.gameObject.tag == "Player")
+    //    {
+    //        collision.transform.parent = transform;
+    //    }
+    //}
+    //
+    ////Si notre joueur quitte cette plateform, il arrêtera d'être son "enfant" et donc ne bougera plus avec la plateforme
+    //void OnCollisionExit2D(Collision2D collision)
+    //{
+    //    if (collision.gameObject.tag == "Player")
+    //    {
+    //        collision.transform.parent = null;
+    //    }
+    //}
+
+
+
+
 
 
     void OnDrawGizmos()
     {
         Gizmos.color = Color.green;
         Gizmos.DrawSphere(new Vector2(PosX, PosY), 0.2f);
-        Gizmos.DrawSphere(new Vector2(PosXRetour, PosYRetour), 0.2f);
-        Gizmos.DrawLine(new Vector2(PosXRetour, PosYRetour), new Vector2(PosX, PosY)); // Dessiner une ligne entre les deux points
+        //Gizmos.DrawSphere(new Vector2(PosXRetour, PosYRetour), 0.2f);
+        Gizmos.DrawSphere(transform.position, 0.2f);
+        Gizmos.DrawLine(transform.position, new Vector2(PosX, PosY)); // Dessiner une ligne entre les deux points
 
         //SceneView.RepaintAll();
     }
